@@ -83,6 +83,12 @@ def create(template_name, parameters_name):
 
     return True
 
+def delete(template_name, parameters_name):
+    client = boto3.client('cloudformation')
+    client.delete_stack(StackName=template_name)
+
+    return True
+
 # main
 def main():
     args = parse_args()
@@ -91,6 +97,8 @@ def main():
         boilerplate(args.template, args.parameters)
     elif args.create:
         create(args.template, args.parameters)
+    elif args.delete:
+        delete(args.template, args.parameters)
 
 
 if __name__ == "__main__":
