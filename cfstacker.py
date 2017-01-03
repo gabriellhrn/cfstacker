@@ -74,12 +74,24 @@ def boilerplate(template_name, parameters_name):
 
     return True
 
+def create(template_name, parameters_name):
+    template_dir = 'templates/%s' % template_name
+    template_file = '%s/%s.yaml' % (template_dir, template_name)
+
+    client = boto3.client('cloudformation')
+    client.create_stack(StackName=template_name, TemplateBody=template_file)
+
+    return True
+
 # main
 def main():
     args = parse_args()
 
     if args.boilerplate:
         boilerplate(args.template, args.parameters)
+    elif args.create:
+        create(args.template, args.parameters)
+
 
 if __name__ == "__main__":
     main()
