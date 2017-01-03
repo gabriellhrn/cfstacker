@@ -1,0 +1,5 @@
+cfstacker
+============
+
+Manages CloudFormation templates.
+
